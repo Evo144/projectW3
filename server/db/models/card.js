@@ -2,9 +2,9 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Card extends Model {
-    static associate({ User, Userscards }) {
+    static associate({ User, Userscard }) {
       this.belongsToMany(User, {
-        through: Userscards,
+        through: Userscard,
         foreignKey: 'cardId',
       });     
     }
@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       word: DataTypes.STRING,
       translate: DataTypes.STRING,
       difficulty: DataTypes.STRING,
+      isLearned: DataTypes.BOOLEAN,
     },
     {
       sequelize,

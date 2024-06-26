@@ -4,9 +4,9 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate({ Card, Userscards, Stat }) { 
+    static associate({ Card, Userscard, Stat }) { 
       this.belongsToMany(Card, {
-        through: Userscards,
+        through: Userscard,
         foreignKey: 'userId',
       });
       this.hasOne(Stat, { foreignKey: 'userId' });
