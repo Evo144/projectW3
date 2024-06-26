@@ -4,14 +4,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import SigninPage from "./pages/SigninPage/SigninPage";
 import SignupPage from "./pages/SignupPage/SignupPage";
-import Profile from "./components/Profile/Profile";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { useEffect, useState } from "react";
 import axiosInstance, { setAccessToken } from "./axiosInstance";
 
 function App() {
     const [user, setUser] = useState();
-    const [card, setCard] = useState([]);
 
     useEffect(() => {
         axiosInstance(`${import.meta.env.VITE_API}/tokens/refresh`).then(
@@ -29,9 +27,11 @@ function App() {
             children: [
                 {
                     path: "/",
-                    element: (
-                        <HomePage user={user} card={card} setCard={setCard} />
-                    ),
+                    element: <HomePage user={user} />,
+                },
+                {
+                    path: "/main",
+                    element: <HomePage user={user} />,
                 },
                 {
                     path: "/signin",
@@ -42,18 +42,7 @@ function App() {
                     element: <SignupPage setUser={setUser} />,
                 },
                 {
-                    path: "/profile",
-                    element: (
-                        <Profile
-                            setUser={setUser}
-                            user={user}
-                            card={card}
-                            setCard={setCard}
-                        />
-                    ),
-                },
-                {
-                    path: "/*",
+                    path: "/not-found",
                     element: <NotFoundPage />,
                 },
             ],
