@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
+import log from "../../../img/logo.jpg";
 import {
     Card,
     CardBody,
@@ -10,6 +11,7 @@ import {
     MenuList,
     MenuItem,
     Link,
+    Image,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
@@ -112,6 +114,15 @@ export default function HomePage({ user, card, setCard }) {
         <div>
             <Text fontSize="lg">"Memorizing Words"</Text>
             <Text fontSize="lg">"To start training, please register"</Text>
+            <Link as={Link} to="/">
+                <img
+                    src={log}
+                    width="100"
+                    height="auto"
+                    className="d-inline-block align-top"
+                    alt="Логотип"
+                />
+            </Link>
             <Link href="/signup" passHref>
                 <Button as="a" colorScheme="orange">
                     Registration
