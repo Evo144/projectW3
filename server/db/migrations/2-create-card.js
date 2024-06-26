@@ -22,6 +22,9 @@ module.exports = {
       difficulty: {
         type: Sequelize.STRING,
       },
+      isLearned: {
+        type: Sequelize.BOOLEAN,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
