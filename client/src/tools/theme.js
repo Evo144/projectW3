@@ -14,7 +14,9 @@ const theme = extendTheme({
       darkPink: '#D1479E',
       black: '#000',
       beige: '#F5F5DC',
-    }
+      softYellow: '#FFF9E5',
+      softPink: '#FFE4E1',
+    },
   },
   components: {
     Menu: {
@@ -36,19 +38,24 @@ const theme = extendTheme({
     Card: {
       baseStyle: {
         container: {
-          bg: 'customColors.lightGray',
+          bg: 'transparent',
           color: 'customColors.darkGray',
           boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
+          borderRadius: '12px',
           _hover: {
             boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.2)',
           },
         },
         front: {
-          bg: 'customColors.gold',
+          bg: 'customColors.softYellow',
+          borderRadius: '12px',
+          opacity: 1,
         },
         back: {
-          bg: 'customColors.darkPink',
-          color: 'customColors.lightGray',
+          bg: 'customColors.lightPink',
+          color: 'customColors.darkGray',
+          borderRadius: '12px',
+          opacity: 1,
         },
       },
     },
@@ -80,4 +87,3 @@ const theme = extendTheme({
 });
 
 export default theme;
-
