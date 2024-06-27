@@ -11,6 +11,7 @@ import axiosInstance, { setAccessToken } from './axiosInstance';
 function App() {
   const [user, setUser] = useState();
   const [card, setCard] = useState([])
+  const [isLearned, setIsLearned] = useState(false);
 
   useEffect(() => {
     axiosInstance(`${import.meta.env.VITE_API}/tokens/refresh`).then((res) => {
@@ -26,7 +27,7 @@ function App() {
       children: [
         {
           path: '/',
-          element: <HomePage user={user} card={card} setCard={setCard}/>,
+          element: <HomePage user={user} card={card} setCard={setCard} isLearned={isLearned} setIsLearned={setIsLearned}/>,
         },
         {
           path: '/signin',
@@ -38,7 +39,8 @@ function App() {
         },
         {
           path: '/profile',
-          element: <Profile setUser={setUser} user={user} card={card} setCard={setCard}/>,
+          element: <Profile setUser={setUser} user={user} card={card} setCard={setCard}
+          isLearned={isLearned} setIsLearned={setIsLearned}/>,
         },
       ],
     },

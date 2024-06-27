@@ -14,6 +14,8 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+        onDelete: 'cascade',
+        allowNull: false,
       },
       cardId: {
         type: Sequelize.INTEGER,
@@ -21,6 +23,8 @@ module.exports = {
           model: 'Cards',
           key: 'id',
         },
+        onDelete: 'cascade',
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
