@@ -29,6 +29,9 @@ export default function HomePage({
   const [editMode, setEditMode] = useState(false);
   const [editedCard, setEditedCard] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [filteredCards, setFilteredCards] = useState([]);
+  const [currentFilter, setCurrentFilter] = useState("all");
+  const [isLearnedFilter, setIsLearnedFilter] = useState(false);
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -68,8 +71,14 @@ export default function HomePage({
 
   const deleteHandler = async (cardId) => {
     try {
-      await axiosInstance.delete(`${VITE_API}/card/${cardId}`);
-      setCard((prev) => prev.filter((el) => el.id !== cardId));
+      const response = await axiosInstance.delete(`${VITE_API}/card/${cardId}`);
+      if (response.status === 200) {
+        console.log('Карточка', card)
+        console.log('Карточка ID', cardId)
+        setFilteredCards((prev) => prev.filter((el) => el.id !== cardId));
+      } else {
+        console.log("Ошибка удаления");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -119,9 +128,7 @@ export default function HomePage({
     }
   };
 
-  const handleSelectCategory = (category) => {
-    setSelectedCategory(category);
-  };
+
 
   const handleLearnedCheckboxChange = async (cardId) => {
     const updatedCard = card.find((el) => el.id === cardId);
@@ -137,9 +144,28 @@ export default function HomePage({
     }
   };
 
-  const filteredCards = selectedCategory
-    ? card.filter((el) => el.category === selectedCategory)
-    : card;
+  const handleSelectFilter = (filter) => {
+    setCurrentFilter(filter);
+  
+    setFilteredCards((prevCards) => {
+      let cards = [...prevCards]; 
+  
+      if (filter === "all") {
+        cards = card.filter((el) => (selectedCategory ? el.category === selectedCategory : true));
+      } else if (filter === "notLearned") {
+        cards = card.filter((el) => (!el.isLearned && (selectedCategory ? el.category === selectedCategory : true)));
+      } else if (filter === "learned") {
+        cards = card.filter((el) => (el.isLearned && (selectedCategory ? el.category === selectedCategory : true)));
+      }
+  
+      if (isLearnedFilter) {
+        cards = cards.filter((el) => el.isLearned);
+      }
+  
+      return cards;
+    });
+  };
+
 
   return (
     <div>
@@ -149,11 +175,25 @@ export default function HomePage({
           {categories.map((el) => (
             <MenuItem
               key={el.id}
-              onClick={() => handleSelectCategory(el.category)}
+              onClick={() => setSelectedCategory(el.category)}
             >
               {el.category}
             </MenuItem>
           ))}
+        </MenuList>
+      </Menu>
+      <Menu>
+        <MenuButton as={Button}>Тип</MenuButton>
+        <MenuList>
+          <MenuItem onClick={() => handleSelectFilter("all")}>
+            Все карточки
+          </MenuItem>
+          <MenuItem onClick={() => handleSelectFilter("notLearned")}>
+            Не изученные
+          </MenuItem>
+          <MenuItem onClick={() => handleSelectFilter("learned")}>
+            Изученные
+          </MenuItem>
         </MenuList>
       </Menu>
       {filteredCards.length ? (
@@ -221,6 +261,7 @@ export default function HomePage({
                   >
                     <CardBody>
                       <Text>{el.word}</Text>
+                      {console.log('ЭЛЕМЕНТ', el)}
                     </CardBody>
                   </motion.div>
                   <motion.div
@@ -240,11 +281,12 @@ export default function HomePage({
                     </Checkbox>
                     <Button onClick={() => editHandler(el.id)}>
                       Редактировать карточку
-                    </Button>
+                    </Button> 
                     <Button onClick={() => deleteHandler(el.id)}>
                       Удалить карточку
-                    </Button>
+                    </Button>  
                   </motion.div>
+             
                 </motion.div>
               )}
             </div>

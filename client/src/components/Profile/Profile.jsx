@@ -78,15 +78,6 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
           onChange={inputsHandler}
           placeholder="Difficulty"
         />
-        <FormLabel>Карточка изучена</FormLabel>
-           <Input
-              type="checkbox"
-              id="isLearned"
-              name="isLearned"
-              checked={isLearned}
-              onChange={() => setIsLearned((prev) => !prev)}
-
-            />
         <br />
         <br />
         <Button type="submit" colorScheme="teal" variant="outline">
