@@ -10,10 +10,10 @@ import {
 const { VITE_API } = import.meta.env;
 
 
-const Profile = ({ user, card, setCard }) => {
+const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
     
     const [inputs, setInputs] = useState({category: "", word: "", translate: "", difficulty: ""})
-    const [isLearned, setIsLearned] = useState(false);
+    
   
     function inputsHandler(e) {
         setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -78,8 +78,8 @@ const Profile = ({ user, card, setCard }) => {
           onChange={inputsHandler}
           placeholder="Difficulty"
         />
-        <label>
-            <input
+        <FormLabel>Карточка изучена</FormLabel>
+           <Input
               type="checkbox"
               id="isLearned"
               name="isLearned"
@@ -87,8 +87,6 @@ const Profile = ({ user, card, setCard }) => {
               onChange={() => setIsLearned((prev) => !prev)}
 
             />
-            Карточка изучена
-        </label>
         <br />
         <br />
         <Button type="submit" colorScheme="teal" variant="outline">
