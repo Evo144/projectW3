@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
-
+import styles from './Profile.module.css';
 import {
   FormLabel,
   Button,
@@ -40,9 +40,9 @@ const Profile = ({ user, card, setCard }) => {
     
 
   return (
-    <div>
+    <div className={styles.profileWrapper}>
         <form onSubmit={handleSubmit}>
-        <FormLabel>Category</FormLabel>
+        <FormLabel className={styles.profileHead}>Category</FormLabel>
         <Input
           type="text"
           id="category"
@@ -50,8 +50,18 @@ const Profile = ({ user, card, setCard }) => {
           value={inputs.category}
           placeholder="category"
           onChange={inputsHandler}
+          sx={{
+            borderColor: 'black', 
+            _hover: {
+              borderColor: 'pink', 
+              backgroundColor: 'yellow.100', 
+            },
+            _placeholder: {
+              color: 'pink.400', 
+            },
+          }}
         />
-        <FormLabel>Word</FormLabel>
+        <FormLabel className={styles.profileHead}>Word</FormLabel>
         <Input
           type="text"
           id="word"
@@ -59,24 +69,56 @@ const Profile = ({ user, card, setCard }) => {
           value={inputs.word}
           onChange={inputsHandler}
           placeholder="Word"
+          sx={{
+            borderColor: 'black', 
+            _hover: {
+              borderColor: 'pink', 
+              backgroundColor: 'yellow.100', 
+            },
+            _placeholder: {
+              color: 'pink.400', 
+            },
+          }}
         />
-        <FormLabel>Translate</FormLabel>
+        <FormLabel className={styles.profileHead}>Translate</FormLabel>
         <Input
+        className={styles.profileInputs}
           type="text"
           id="translate"
           name="translate"
           value={inputs.translate}
           onChange={inputsHandler}
           placeholder="Translate"
+          sx={{
+            borderColor: 'black', 
+            _hover: {
+              borderColor: 'pink', 
+              backgroundColor: 'yellow.100', 
+            },
+            _placeholder: {
+              color: 'pink.400', 
+            },
+          }}
         />
-        <FormLabel>Difficulty</FormLabel>
+        <FormLabel className={styles.profileHead}>Difficulty</FormLabel>
         <Input
+         className={styles.profileInputs}
           type="text"
           id="difficulty"
           name="difficulty"
           value={inputs.difficulty}
           onChange={inputsHandler}
           placeholder="Difficulty"
+           sx={{
+                borderColor: 'black', 
+                _hover: {
+                  borderColor: 'pink', 
+                  backgroundColor: 'yellow.100', 
+                },
+                _placeholder: {
+                  color: 'pink.400', 
+                },
+              }}
         />
         <label>
             <input
@@ -85,13 +127,12 @@ const Profile = ({ user, card, setCard }) => {
               name="isLearned"
               checked={isLearned}
               onChange={() => setIsLearned((prev) => !prev)}
-
             />
             Карточка изучена
         </label>
         <br />
         <br />
-        <Button type="submit" colorScheme="teal" variant="outline">
+        <Button type="submit" className={styles.profileBtns}>
           Создать карточку
         </Button>
       </form>

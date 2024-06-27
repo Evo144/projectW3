@@ -3,7 +3,6 @@ import styles from './AuthForm.module.css';
 import { Input, Button } from '@chakra-ui/react';
 import axiosInstance, { setAccessToken } from '../../axiosInstance';
 import { useNavigate } from 'react-router-dom';
-
 const { VITE_API } = import.meta.env;
 
 export default function AuthForm({ title, type = 'signin', setUser }) {
@@ -30,19 +29,37 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
           <>
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               type='email'
               name='email'
               value={inputs?.email}
-              placeholder='Эл.почта'
+              placeholder='Электронная почта'
+              sx={{
+                borderColor: 'black', 
+                _hover: {
+                  borderColor: 'pink', 
+                  backgroundColor: 'yellow.100', 
+                },
+                _placeholder: {
+                  color: 'pink.400', 
+                },
+              }}
             />
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               type='password'
               name='password'
               value={inputs?.password}
               placeholder='Пароль'
+              sx={{
+                borderColor: 'black', 
+                _hover: {
+                  borderColor: 'pink', 
+                  backgroundColor: 'yellow.100', 
+                },
+                _placeholder: {
+                  color: 'pink.400', 
+                },
+              }}
             />
           </>
         )}
@@ -50,26 +67,53 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
           <>
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               name='username'
               value={inputs?.name}
               placeholder='Имя пользователя'
+              sx={{
+                borderColor: 'black', 
+                _hover: {
+                  borderColor: 'pink', 
+                  backgroundColor: 'yellow.100', 
+                },
+                _placeholder: {
+                  color: 'pink.400', 
+                },
+              }}
             />
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               type='email'
               name='email'
               value={inputs?.description}
-              placeholder='Эл.почта'
+              placeholder='Электронная почта'
+              sx={{
+                borderColor: 'black', 
+                _hover: {
+                  borderColor: 'pink', 
+                  backgroundColor: 'yellow.100', 
+                },
+                _placeholder: {
+                  color: 'pink.400', 
+                },
+              }}
             />
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               type='password'
               name='password'
               value={inputs?.password}
               placeholder='Пароль'
+              sx={{
+                borderColor: 'black', 
+                _hover: {
+                  borderColor: 'pink', 
+                  backgroundColor: 'yellow.100', 
+                },
+                _placeholder: {
+                  color: 'pink.400', 
+                },
+              }}
             />
           </>
         )}
