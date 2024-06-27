@@ -4,7 +4,7 @@ const {
   verifyAccessToken,
   verifyRefreshToken,
 } = require('../middlewares/verifyToken');
-const checkOwner = require('../middlewares/checkOwner');
+//const checkOwner = require('../middlewares/checkOwner');
 
 router
 
@@ -55,7 +55,7 @@ router
     }
   })
 
-  .post('/:id', verifyAccessToken, checkOwner, async (req, res) => {
+  .post('/:id', verifyAccessToken, async (req, res) => {
     const { category, word, translate, difficulty, isLearned } = req.body;
 
     try {
