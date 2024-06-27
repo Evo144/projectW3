@@ -20,13 +20,19 @@ export default function ProgressList({ user }) {
   let progress = progressInf?.progress;
   let points = progressInf?.points;
   let username = progressInf?.username;
+  let quantityOfCards = progressInf?.quantityOfCards;
   console.log("progressInf-----++", progressInf);
 
   return (
     <div className={styles.wrapper}>
+
+
+
       {progress?.length
         ? progress.map((el) => (
             <ProgressCard
+            // width="100%"
+
               key={el.id}
               entry={el}
             />

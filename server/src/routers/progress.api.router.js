@@ -25,7 +25,9 @@ router.post('/:id', verifyAccessToken, async (req, res) => {
       const eCards = entryCards.get({ plain: true });
       const { username, Cards } = eCards;
       const points = entryStat.Stat.points;
+      let quantityOfCards = 0;
       const cardsProgress = {};
+      
       Cards.forEach((card) => {
         const newCard = {
           totalCards: 0,
@@ -40,9 +42,10 @@ router.post('/:id', verifyAccessToken, async (req, res) => {
         }
         cardsProgress[card.category].totalCards += 1;
         cardsProgress[card.category].id = card.id;
+        quantityOfCards += 1;
       });
       const progress = Object.values(cardsProgress)
-      const cardsByCategory = { username, points, progress };
+      const cardsByCategory = { username, quantityOfCards, points, progress };
       console.log(progress);
       res.json(cardsByCategory);
     } else {
