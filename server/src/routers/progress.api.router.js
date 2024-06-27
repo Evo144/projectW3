@@ -5,17 +5,46 @@ const { verifyAccessToken } = require('../middlewares/verifyToken');
 router.post('/:id', verifyAccessToken, async (req, res) => {
   const { id } = req.params;
   try {
-    const entry = await User.findOne({
+    const entryStat = await User.findOne({
       where: { id },
-      include: { model: Resume },
       include: { model: Stat },
     });
-    if (res.locals.user.id === entry.dataValues.id) {
-      const { username, Cards, Stats } = entry.dataValues;
-      const points = Stats.points
-      safestEntry = { username, Cards, points };
-
-      res.json(safestEntry);
+    const entryCards = await User.findOne({
+      where: { id },
+      include: [
+        {
+          model: Card,
+          attributes: [ 'id', 'category', 'isLearned'],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+    if (res.locals.user.id === entryCards.dataValues.id) {
+      const eCards = entryCards.get({ plain: true });
+      const { username, Cards } = eCards;
+      const points = entryStat.Stat.points;
+      const cardsProgress = {};
+      Cards.forEach((card) => {
+        const newCard = {
+          totalCards: 0,
+          isLearnedTrue: 0,
+        };
+        if (!(card.category in cardsProgress)) {
+          cardsProgress[card.category] = newCard;
+          cardsProgress[card.category].category = card.category;
+        }
+        if (card.isLearned) {
+          cardsProgress[card.category].isLearnedTrue += 1;
+        }
+        cardsProgress[card.category].totalCards += 1;
+        cardsProgress[card.category].id = card.id;
+      });
+      const progress = Object.values(cardsProgress)
+      const cardsByCategory = { username, points, progress };
+      console.log(progress);
+      res.json(cardsByCategory);
     } else {
       res.sendStatus(403);
     }

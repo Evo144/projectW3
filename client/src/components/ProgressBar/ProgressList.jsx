@@ -1,28 +1,34 @@
-import ProgressCard from './ProgressCard';
-import styles from './ProgressCard.module.css';
+import ProgressCard from "./ProgressCard";
+import styles from "./ProgressCard.module.css";
+import axiosInstance from "../../axiosInstance";
+import { useState, useEffect } from "react";
 
-export default function ProgressList({ data, setEntries, user }) {
-  //? axios.get('http://localhost:3100/api/v1/auth/signup', {
-  //?   withCredentials: true,
-  //?   headers: {
-  //?     'Authorization': accessToken
-  //?   }
-  //? });
+const { VITE_API } = import.meta.env;
 
-  //? fetch('http://localhost:3100/api/v1/auth/signup', {
-  //?   method: 'GET',
-  //?   credentials: 'include',
-  //? });
+export default function ProgressList({ user }) {
+  const [progressInf, setProgressInf] = useState();
+
+  useEffect(() => {
+    axiosInstance
+      .post(`${VITE_API}/progress/${user?.id}`)
+      .then((res) => {
+        setProgressInf(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, [user]);
+
+  let progress = progressInf?.progress;
+  let points = progressInf?.points;
+  let username = progressInf?.username;
+  console.log("progressInf-----++", progressInf);
 
   return (
     <div className={styles.wrapper}>
-      {data.length
-        ? data.map((el) => (
+      {progress?.length
+        ? progress.map((el) => (
             <ProgressCard
               key={el.id}
               entry={el}
-              setEntries={setEntries}
-              user={user}
             />
           ))
         : null}
