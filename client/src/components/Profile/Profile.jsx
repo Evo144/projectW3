@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
+import ProgressList from "../ProgressBar/ProgressList"
 
-import {
-  FormLabel,
-  Button,
-  Input,
-} from "@chakra-ui/react";
+import { FormLabel, Button, Input } from "@chakra-ui/react";
 
 const { VITE_API } = import.meta.env;
 
@@ -40,7 +37,8 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
     
 
   return (
-    <div>
+    <>
+      <div>
         <form onSubmit={handleSubmit}>
         <FormLabel>Category</FormLabel>
         <Input
@@ -78,15 +76,6 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
           onChange={inputsHandler}
           placeholder="Difficulty"
         />
-        <FormLabel>Карточка изучена</FormLabel>
-           <Input
-              type="checkbox"
-              id="isLearned"
-              name="isLearned"
-              checked={isLearned}
-              onChange={() => setIsLearned((prev) => !prev)}
-
-            />
         <br />
         <br />
         <Button type="submit" colorScheme="teal" variant="outline">
@@ -94,6 +83,8 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
         </Button>
       </form>
     </div>
+    <ProgressList user={user} />
+    </>
   );
 };
 
