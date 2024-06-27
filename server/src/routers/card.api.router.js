@@ -32,14 +32,17 @@ router
     }
   })
 
-  .delete('/:id', async (req, res) => {  
+  .delete('/:id', async (req, res) => {
+    console.log('Зашёл в ручку')  
     const { id } = req.params;
+    console.log('ID', id);
     try {
       const card = await Card.findOne({
         where: {
           id,
         },
       });
+      console.log('Карточка', card)  
       await card.destroy();
       res.sendStatus(200);
     } catch (error) {
