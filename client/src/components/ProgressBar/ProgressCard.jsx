@@ -1,19 +1,31 @@
+import { useState, useEffect } from "react";
 import styles from "./ProgressList.module.css";
 import './styles.scss'
 import ProgressBar from "@ramonak/react-progress-bar";
+
 // import { useDisclosure } from "@chakra-ui/react";
 
 export default function ProgressCard({  entry }) {
+  const [result, setResult] = useState();
+  useEffect(() => {
+    setResult( Math.trunc(entry?.isLearnedTrue / entry?.totalCards * 100))
+  }, [entry]);
 
-const result = (entry?.isLearnedTrue / entry?.totalCards)
+  let label = `${entry?.category}: ${entry?.isLearnedTrue}`
+
   return (
     <div className={styles.wrapper}>
       <ProgressBar
-       completed={result} customLabel={entry?.category} 
+       completed={result} 
+       customLabel={label} 
        className="wrapper"
        barContainerClassName="container"
-       completedClassName="barCompleted"
+      //  completedClassName="barCompleted"
        labelClassName="label"
+       height="30"
+       animateOnRender="true"
+       labelAlignment="left"
+      bgColor="rgba(253, 159, 216, 1)"
        />
     </div>
   );

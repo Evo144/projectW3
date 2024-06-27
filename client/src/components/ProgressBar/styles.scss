@@ -1,21 +1,19 @@
 .wrapper {
-    border: 3px solid blue;
+    border: 3px solid black;
     border-radius: 10px;
-    // width: 100%;
   }
   
   .container {
-    background-color: rgb(242, 235, 176);
+    background-color: rgba(242, 235, 176, 1);
     border-radius: 10px;
 
   }
   
   .barCompleted {
-    background-color: rgb(253, 209, 216);
-    width: 80%;
+    background-color: rgba(253, 209, 216, 1);
   }
   
   .label {
     font-size: 20px;
-    color: rgb(104, 133, 187);
+    color: rgb(0, 0, 0);
   }

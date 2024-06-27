@@ -2,6 +2,7 @@ import ProgressCard from "./ProgressCard";
 import styles from "./ProgressCard.module.css";
 import axiosInstance from "../../axiosInstance";
 import { useState, useEffect } from "react";
+import { Heading } from '@chakra-ui/react'
 
 const { VITE_API } = import.meta.env;
 
@@ -18,21 +19,16 @@ export default function ProgressList({ user }) {
   }, [user]);
 
   let progress = progressInf?.progress;
-  let points = progressInf?.points;
   let username = progressInf?.username;
   let quantityOfCards = progressInf?.quantityOfCards;
-  console.log("progressInf-----++", progressInf);
+  let quantityOfLearnedCards = progressInf?.quantityOfLearnedCards;
 
   return (
     <div className={styles.wrapper}>
-
-
-
+<Heading>Мой прогресс: изучено карточек </Heading>
       {progress?.length
         ? progress.map((el) => (
             <ProgressCard
-            // width="100%"
-
               key={el.id}
               entry={el}
             />
