@@ -11,7 +11,17 @@ const AnimatedCard = ({ frontContent, backContent }) => {
   });
 
   return (
-    <div onClick={() => setFlipped(state => !state)} style={{ position: 'relative', width: '300px', height: '200px' }}>
+    <div onClick={() => setFlipped(state => !state)} 
+      style={{  
+        display: 'flex', 
+        flexDirection: 'row',
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        position: 'relative',
+        width: '100%', 
+        height: 'auto', 
+      }}
+    >
       <animated.div
         style={{
           opacity: opacity.to(o => 1 - o),
@@ -26,7 +36,7 @@ const AnimatedCard = ({ frontContent, backContent }) => {
       </animated.div>
       <animated.div
         style={{
-          opacity: opacity.to(o => o),
+          opacity,
           transform: transform.to(t => `${t} rotateY(180deg)`),
           position: 'absolute',
           backfaceVisibility: 'hidden',
