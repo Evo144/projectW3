@@ -1,14 +1,16 @@
 :root {
-  --light-pink: #FFD6E7;
-  --dark-pink: #D1479E;
-  --light-yellow: #FFFAE6; /* Светло-желтый цвет для фона */
-  --dark-yellow: #FFD700; /* Темно-желтый цвет для акцентов */
+  --soft-pink: #FDE2E4; 
+  --muted-pink: #FAD2E1; 
+  --soft-yellow: #FFF5BA; 
+  --muted-yellow: #FFFACD; 
+  --contrast-dark: #333333;
+  --soft-border: #FFFACD; 
   --border-radius: 5px;
   --transition-speed: 0.3s;
 }
 
 .wrapper {
-  background-color: var(--light-pink);
+  background-color: var(--muted-pink);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,7 +24,7 @@
 }
 
 .head {
-  color: var(--dark-pink);
+  color: var(--contrast-dark);
   font-weight: bold;
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -38,9 +40,12 @@
 }
 
 .inputs input {
+  background-color: var(--soft-pink);
+  color: var(--contrast-dark);
   margin-bottom: 20px;
   border-radius: var(--border-radius);
   transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+  border: 1px solid var(--contrast-dark);
 }
 
 .inputs input:focus {
@@ -48,7 +53,7 @@
 }
 
 .inputs input:hover {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px 0 rgba(220, 80, 255, 0.2);
 }
 
 .btns {
@@ -56,22 +61,22 @@
 }
 
 .btns button {
-  background-color: var(--dark-yellow);
-  color: var(--dark-pink);
+  background: linear-gradient(30deg, var(--soft-pink), var(--muted-yellow));
+  color: var(--contrast-dark);
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
 }
 
 .btns button:hover {
-  background-color: #FF69B4;
+  background: linear-gradient(45deg, var(--soft-yellow), #ff9dce);
   transform: translateY(-2px);
 }
 
 .btns button:hover, .btns button:focus {
-  background-color: var(--light-yellow);
+  background-color: var(--soft-yellow);
   transform: translateY(-2px);
   outline: none; 
 }

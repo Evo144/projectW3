@@ -13,8 +13,6 @@ import {
   MenuList,
   MenuItem,
   Checkbox,
-  IconButton,
-  Flex,
   FormLabel,
   Input,
 } from "@chakra-ui/react";
@@ -189,146 +187,141 @@ export default function HomePage({
 
     return (
         <div>
-            <Menu>
-                <MenuButton as={Button}>Темы</MenuButton>
-                <MenuList>
-                    {categories.map((el) => (
-                        <MenuItem
-                            key={el.id}
-                            onClick={() => setSelectedCategory(el.category)}
-                        >
-                            {el.category}
-                        </MenuItem>
-                    ))}
-                </MenuList>
-            </Menu>
-            <Menu>
-                <MenuButton as={Button}>Тип</MenuButton>
-                <MenuList>
-                    <MenuItem onClick={() => handleSelectFilter("all")}>
-                        Все карточки
-                    </MenuItem>
-                    <MenuItem onClick={() => handleSelectFilter("notLearned")}>
-                        Не изученные
-                    </MenuItem>
-                    <MenuItem onClick={() => handleSelectFilter("learned")}>
-                        Изученные
-                    </MenuItem>
-                </MenuList>
-            </Menu>
-            {filteredCards.length ? (
-                filteredCards.map((el) => (
-                    <Card className="container" align="center" key={el.id}>
-                         <Box > 
-                            {editMode &&
-                            editedCard &&
-                            editedCard.id === el.id ? (
-                                <Box className="back">
-                                    <FormLabel>Category</FormLabel>
-                                    <Input
-                                        type="text"
-                                        name="category"
-                                        value={editedCard.category}
-                                        onChange={handleChange}
-                                        placeholder="category"
-                                    />
-                                    <FormLabel>Word</FormLabel>
-                                    <Input
-                                        type="text"
-                                        name="word"
-                                        value={editedCard.word}
-                                        onChange={handleChange}
-                                        placeholder="word"
-                                    />
-                                    <FormLabel>Translate</FormLabel>
-                                    <Input
-                                        type="text"
-                                        name="translate"
-                                        value={editedCard.translate}
-                                        onChange={handleChange}
-                                        placeholder="translate"
-                                    />
-                                    <FormLabel>Difficulty</FormLabel>
-                                    <Input
-                                        type="text"
-                                        name="difficulty"
-                                        value={editedCard.difficulty}
-                                        onChange={handleChange}
-                                        placeholder="difficulty"
-                                    />
-                                    <FormLabel>Изучено</FormLabel>
-                                    <Checkbox
-                                        type="checkbox"
-                                        id="isLearned"
-                                        name="isLearned"
-                                        checked={editedCard.isLearned}
-                                        onChange={handleChange}
-                                    />
-                                    <Button onClick={saveHandler}>
-                                        Сохранить
-                                    </Button>
-                                    </Box>
-                            ) : (
-                                <AnimatedCard
-                                frontContent={
-                                  <Box
-                                    className="front"
-                                    style={{
-                                      display: 'flex',
-                                      flexDirection: 'column',
-                                      justifyContent: 'center',
-                                      alignItems: 'center',
-                                      minHeight: '100%',
-                                      padding: '1rem',
-                                      backgroundColor: 'white', 
-                                      backfaceVisibility: 'hidden', 
-                                    }}
-                                  >
-                                    <CardBody>
-                                      <Text>{el.word}</Text>
-                                    </CardBody>
-                                  </Box>
-                                }
-                                backContent={
-                                  <Box
-                                    className="back"
-                                    style={{
-                                      display: 'flex',
-                                      flexDirection: 'column',
-                                      justifyContent: 'center',
-                                      alignItems: 'center',
-                                      minHeight: '100%',
-                                      padding: '1rem',
-                                      backgroundColor: 'white', 
-                                      backfaceVisibility: 'hidden', 
-                                    }}
-                                  >
-                                    <CardBody>
-                                      <Text fontSize="lg">{el.translate}</Text>
-                                    </CardBody>
-                                    <Checkbox
-                                      colorScheme="pink"
-                                      isChecked={el.isLearned}
-                                      onChange={() => handleLearnedCheckboxChange(el.id)}
-                                    >
-                                      Изучено
-                                    </Checkbox>
-                                    <Button onClick={() => editHandler(el.id)}>
-                                      Редактировать карточку
-                                    </Button>
-                                    <Button onClick={() => deleteHandler(el.id)}>
-                                      Удалить карточку
-                                    </Button>
-                                  </Box>
-                                }
-                              />
-                            )}
-                          </Box>
-                        </Card>
-                      ))
-                    ) : (
-                      <div>Карточек нет</div>
-                    )}
-                  </div>
+        <Menu>
+          <MenuButton as={Button} >Темы</MenuButton>
+          <MenuList>
+            {categories.map((el) => (
+              <MenuItem key={el.id} onClick={() => setSelectedCategory(el.category)}>
+                {el.category}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Menu>
+        <Menu>
+          <MenuButton as={Button}>Тип</MenuButton>
+          <MenuList>
+            <MenuItem onClick={() => handleSelectFilter("all")}>
+              Все карточки
+            </MenuItem>
+            <MenuItem onClick={() => handleSelectFilter("notLearned")}>
+              Не изученные
+            </MenuItem>
+            <MenuItem onClick={() => handleSelectFilter("learned")}>
+              Изученные
+            </MenuItem>
+          </MenuList>
+        </Menu>
+        {filteredCards.length ? (
+          filteredCards.map((el) => (
+            <AnimatedCard
+              key={el.id}
+              frontContent={
+                <Card>
+                  <Box
+                    className="front"
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      minHeight: '100%',
+                      padding: '1rem',
+                      backgroundColor: 'white',
+                      backfaceVisibility: 'hidden',
+                    }}
+                  >
+                    <CardBody>
+                      <Text>{el.word}</Text>
+                    </CardBody>
+                  </Box>
+                </Card>
+              }
+              backContent={
+                <Card>
+                  {editMode && editedCard && editedCard.id === el.id ? (
+                    <Box className="back">
+                      <FormLabel>Category</FormLabel>
+                      <Input
+                        type="text"
+                        name="category"
+                        value={editedCard.category}
+                        onChange={handleChange}
+                        placeholder="category"
+                      />
+                      <FormLabel>Word</FormLabel>
+                      <Input
+                        type="text"
+                        name="word"
+                        value={editedCard.word}
+                        onChange={handleChange}
+                        placeholder="word"
+                      />
+                      <FormLabel>Translate</FormLabel>
+                      <Input
+                        type="text"
+                        name="translate"
+                        value={editedCard.translate}
+                        onChange={handleChange}
+                        placeholder="translate"
+                      />
+                      <FormLabel>Difficulty</FormLabel>
+                      <Input
+                        type="text"
+                        name="difficulty"
+                        value={editedCard.difficulty}
+                        onChange={handleChange}
+                        placeholder="difficulty"
+                      />
+                      <FormLabel>Изучено</FormLabel>
+                      <Checkbox
+                        type="checkbox"
+                        id="isLearned"
+                        name="isLearned"
+                        checked={editedCard.isLearned}
+                        onChange={handleChange}
+                      />
+                      <Button onClick={saveHandler}>Сохранить</Button>
+                    </Box>
+                  ) : (
+                    <Box
+                      className="back"
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        minHeight: '100%',
+                        padding: '1rem',
+                        backgroundColor: 'white',
+                        backfaceVisibility: 'hidden',
+                      }}
+                    >
+                      <CardBody>
+                        <Text fontSize="lg">{el.translate}</Text>
+                      </CardBody>
+                      <Checkbox
+                        colorScheme="pink"
+                        isChecked={el.isLearned}
+                        onChange={() => handleLearnedCheckboxChange(el.id)}
+                      >
+                        Изучено
+                      </Checkbox>
+                      <Button onClick={() => editHandler(el.id)}>
+                        Редактировать карточку
+                      </Button>
+                      <Button onClick={() => deleteHandler(el.id)}>
+                        Удалить карточку
+                      </Button>
+                    </Box>
+                  )}
+                </Card>
+              }
+            />
+          ))
+        ) : (
+          <div>Карточек нет</div>
+        )}
+      </div>
+      
     );
 }

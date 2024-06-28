@@ -16,22 +16,45 @@ const theme = extendTheme({
       beige: '#F5F5DC',
       softYellow: '#FFF9E5',
       softPink: '#FFE4E1',
+      lighterBeige: '#FAF8F0',
     },
   },
   components: {
     Menu: {
-      parts: ['button', 'list'],
+      parts: ['button', 'list', 'item'],
       baseStyle: {
         button: {
-          bg: 'customColors.lightGray',
+          fontSize: 'lg',
+          fontWeight: 'bold',
+          bg: 'customColors.gold', 
           color: 'customColors.darkGray',
+          padding: '3.5rem', 
+          transition: 'all 0.2s cubic-bezier(.08,.52,.52,1)', 
           _hover: {
-            bg: 'customColors.darkPink',
+            bg: 'customColors.darkPink', 
+            transform: 'scale(0.95)',
+          },
+          _active: {
+            bg: 'customColors.lightPink', 
+          },
+          _focus: {
+            boxShadow: '0 0 0 3px rgba(209, 71, 158, 0.6)', 
           },
         },
         list: {
-          bg: 'customColors.lightPink',
+          bg: 'customColors.softPink', 
           color: 'customColors.darkGray',
+          boxShadow: 'xl', 
+        },
+        item: {
+          _hover: {
+            bg: 'customColors.lightGray', 
+            color: 'customColors.black', 
+          },
+          _focus: {
+            bg: 'customColors.beige', 
+            color: 'customColors.darkGray',
+          },
         },
       },
     },
@@ -49,10 +72,9 @@ const theme = extendTheme({
           _hover: {
             boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.2)',
           },
-          position: 'relative',
         },
         front: {
-          height: 'fit-content',
+          height: 'auto',
           bg: 'customColors.softYellow',
           borderRadius: '12px',
           opacity: 1,
@@ -66,7 +88,7 @@ const theme = extendTheme({
           opacity: 1,
           minH: 'auto', 
           p: 4,
-          height: 'fit-content',
+          height: 'auto',
         },
       },
     },
@@ -74,7 +96,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        bg: 'customColors.beige',
+        bg: 'customColors.lighterBeige',
         color: 'customColors.darkGray',
       },
       a: {
