@@ -40,7 +40,6 @@ export default function AuthForm({ title, type = "signin", setUser }) {
           <>
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               type='email'
               name='email'
               value={inputs?.email}
@@ -48,7 +47,6 @@ export default function AuthForm({ title, type = "signin", setUser }) {
             />
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               type='password'
               name='password'
               value={inputs?.password || ""}
@@ -60,14 +58,12 @@ export default function AuthForm({ title, type = "signin", setUser }) {
           <>
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               name='username'
               value={inputs?.name}
               placeholder='Имя пользователя'
             />
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               type='email'
               name='email'
               value={inputs?.description}
@@ -75,7 +71,6 @@ export default function AuthForm({ title, type = "signin", setUser }) {
             />
             <Input
               onChange={changeHandler}
-              borderColor='#3f3e3e'
               type='password'
               name='password'
               value={inputs?.password || ""}
@@ -91,12 +86,12 @@ export default function AuthForm({ title, type = "signin", setUser }) {
       </div>
       <div className={styles.btns}>
         {type === 'signin' && (
-          <Button type='submit' colorScheme='blue'>
+          <Button type='submit'>
             Вход
           </Button>
         )}
         {type === 'signup' && (
-          <Button type='submit' colorScheme='blue'>
+          <Button type='submit'>
             Регистрация
           </Button>
         )}
