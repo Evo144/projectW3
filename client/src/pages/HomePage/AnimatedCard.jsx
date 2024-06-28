@@ -13,11 +13,11 @@ const AnimatedCard = ({ frontContent, backContent }) => {
   return (
     <div onClick={() => setFlipped(state => !state)} 
       style={{  
-        display: 'flex', 
-        flexDirection: 'row',
+        // display: 'flex', 
+        // flexDirection: 'row',
         justifyContent: 'center', 
         alignItems: 'center', 
-        position: 'relative',
+        // position: 'relative',
         width: '100%', 
         height: 'auto', 
       }}
@@ -26,7 +26,7 @@ const AnimatedCard = ({ frontContent, backContent }) => {
         style={{
           opacity: opacity.to(o => 1 - o),
           transform,
-          position: 'absolute',
+          // position: 'absolute',
           backfaceVisibility: 'hidden',
           width: '100%',
           height: '100%',
@@ -38,7 +38,7 @@ const AnimatedCard = ({ frontContent, backContent }) => {
         style={{
           opacity,
           transform: transform.to(t => `${t} rotateY(180deg)`),
-          position: 'absolute',
+          // position: 'absolute',
           backfaceVisibility: 'hidden',
           width: '100%',
           height: '100%',
