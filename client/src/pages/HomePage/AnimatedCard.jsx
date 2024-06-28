@@ -40,6 +40,7 @@ const AnimatedCard = ({ frontContent, backContent }) => {
           backfaceVisibility: 'hidden',
           width: '100%',
           height: '100%',
+          backgroundImage: 'linear-gradient(to right, #fae3f5, #ffeecb, #f6ffe7)'
         }}
       >
         {backContent}

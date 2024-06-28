@@ -13,6 +13,8 @@ import axiosInstance, { setAccessToken } from "./axiosInstance";
 function App() {
     const [user, setUser] = useState();
     const [card, setCard] = useState([]);
+    const [filteredCards, setFilteredCards] = useState([]);
+    const [initialCards, setInitialCards] = useState([]);
 
     useEffect(() => {
         axiosInstance(`${import.meta.env.VITE_API}/tokens/refresh`).then(
@@ -31,7 +33,9 @@ function App() {
                 {
                     path: "/",
                     element: (
-                        <HomePage user={user} card={card} setCard={setCard} 
+                        <HomePage user={user} filteredCards={filteredCards} setFilteredCards={setFilteredCards}
+                        initialCards={initialCards} setInitialCards={setInitialCards}
+
                     />
                     ),
                 },
@@ -49,8 +53,7 @@ function App() {
                         <Profile
                             setUser={setUser}
                             user={user}
-                            card={card}
-                            setCard={setCard}
+                            initialCards={initialCards} setInitialCards={setInitialCards}
                            
                         />
                     ),

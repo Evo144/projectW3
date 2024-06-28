@@ -8,7 +8,7 @@ import { FormLabel, Button, Input, Stack, HStack, VStack, Box, Spacer, Container
 const { VITE_API } = import.meta.env;
 
 
-const Profile = ({ user, card, setCard, isLearned, setIsLearned, actualCard, setActualCard }) => {
+const Profile = ({ user, initialCards, setFilteredCards, setInitialCards, isLearned, setIsLearned, actualCard, setActualCard }) => {
     
     const [inputs, setInputs] = useState({category: "", word: "", translate: "", difficulty: ""})
     
@@ -24,7 +24,7 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned, actualCard, set
             `${VITE_API}/card/${user.id}`,
             { ...inputs, isLearned: isLearned }
           );
-          setCard((prev) => [...prev, data]);
+          setInitialCards((prev) => [...prev, data]);
           setInputs({
             category: "",
             word: "",

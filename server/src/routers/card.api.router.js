@@ -72,10 +72,7 @@ router
         cardId: newCard.id,
       });
 
-      return res.status(201).json({
-        message: 'Карточка успешно создана',
-        data: { newCard, data },
-      });
+      return res.status(201).json(newCard);
     } catch (error) {
       console.log('Ошибка', error);
       return res.status(500).json({
