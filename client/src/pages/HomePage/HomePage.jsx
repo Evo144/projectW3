@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
+import AnimatedCard from "./AnimatedCard";
+// import styles from './HomePage.module.css';
 import {
-    Card,
-    CardBody,
-    Text,
-    Menu,
-    Button,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    Checkbox,
-    Input,
-    FormLabel,
+  Box,
+  Card,
+  CardBody,
+  Text,
+  Menu,
+  Button,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Checkbox,
+  IconButton,
+  Flex,
+  FormLabel,
+  Input,
 } from "@chakra-ui/react";
-import { motion } from "framer-motion";
-
+import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 const { VITE_API } = import.meta.env;
 
 export default function HomePage({
@@ -214,12 +218,12 @@ export default function HomePage({
             </Menu>
             {filteredCards.length ? (
                 filteredCards.map((el) => (
-                    <Card align="center" key={el.id}>
-                        <div>
+                    <Card className="container" align="center" key={el.id}>
+                         <Box > 
                             {editMode &&
                             editedCard &&
                             editedCard.id === el.id ? (
-                                <div>
+                                <Box className="back">
                                     <FormLabel>Category</FormLabel>
                                     <Input
                                         type="text"
@@ -263,77 +267,68 @@ export default function HomePage({
                                     <Button onClick={saveHandler}>
                                         Сохранить
                                     </Button>
-                                </div>
+                                    </Box>
                             ) : (
-                                <motion.div
-                                    whileHover={{ scale: 1.05 }}
-                                    onClick={() => handleCardClick(el.id)}
-                                    initial={{ y: 0 }}
-                                    animate={{
-                                        rotateX: flippedCardIds.has(el.id)
-                                            ? 360
-                                            : 0,
+                                <AnimatedCard
+                                frontContent={
+                                  <Box
+                                    className="front"
+                                    style={{
+                                      display: 'flex',
+                                      flexDirection: 'column',
+                                      justifyContent: 'center',
+                                      alignItems: 'center',
+                                      minHeight: '100%',
+                                      padding: '1rem',
+                                      backgroundColor: 'white', 
+                                      backfaceVisibility: 'hidden', 
                                     }}
-                                    className="card-container"
-                                >
-                                    <motion.div
-                                        initial={{ opacity: 1 }}
-                                        animate={{
-                                            opacity: flippedCardIds.has(el.id)
-                                                ? 0
-                                                : 1,
-                                        }}
-                                        className="card-front"
+                                  >
+                                    <CardBody>
+                                      <Text>{el.word}</Text>
+                                    </CardBody>
+                                  </Box>
+                                }
+                                backContent={
+                                  <Box
+                                    className="back"
+                                    style={{
+                                      display: 'flex',
+                                      flexDirection: 'column',
+                                      justifyContent: 'center',
+                                      alignItems: 'center',
+                                      minHeight: '100%',
+                                      padding: '1rem',
+                                      backgroundColor: 'white', 
+                                      backfaceVisibility: 'hidden', 
+                                    }}
+                                  >
+                                    <CardBody>
+                                      <Text fontSize="lg">{el.translate}</Text>
+                                    </CardBody>
+                                    <Checkbox
+                                      colorScheme="pink"
+                                      isChecked={el.isLearned}
+                                      onChange={() => handleLearnedCheckboxChange(el.id)}
                                     >
-                                        <CardBody>
-                                            <Text>{el.word}</Text>
-                                            {console.log("ЭЛЕМЕНТ", el)}
-                                        </CardBody>
-                                    </motion.div>
-                                    <motion.div
-                                        initial={{ opacity: 0 }}
-                                        animate={{
-                                            opacity: flippedCardIds.has(el.id)
-                                                ? 1
-                                                : 0,
-                                        }}
-                                        className="card-back"
-                                    >
-                                        <CardBody>
-                                            <Text fontSize="lg">
-                                                {el.translate}
-                                            </Text>
-                                        </CardBody>
-                                        <Checkbox
-                                            colorScheme="pink"
-                                            isChecked={el.isLearned}
-                                            onChange={() =>
-                                                handleLearnedCheckboxChange(
-                                                    el.id
-                                                )
-                                            }
-                                        >
-                                            Изучено
-                                        </Checkbox>
-                                        <Button
-                                            onClick={() => editHandler(el.id)}
-                                        >
-                                            Редактировать карточку
-                                        </Button>
-                                        <Button
-                                            onClick={() => deleteHandler(el.id)}
-                                        >
-                                            Удалить карточку
-                                        </Button>
-                                    </motion.div>
-                                </motion.div>
+                                      Изучено
+                                    </Checkbox>
+                                    <Button onClick={() => editHandler(el.id)}>
+                                      Редактировать карточку
+                                    </Button>
+                                    <Button onClick={() => deleteHandler(el.id)}>
+                                      Удалить карточку
+                                    </Button>
+                                  </Box>
+                                }
+                              />
                             )}
-                        </div>
-                    </Card>
-                ))
-            ) : (
-                <div>Карточек нет</div>
-            )}
-        </div>
+                          </Box>
+                        </Card>
+                      ))
+                    ) : (
+                      <div>Карточек нет</div>
+                    )}
+                  </div>
     );
 }

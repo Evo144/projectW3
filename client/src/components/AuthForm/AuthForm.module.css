@@ -1,23 +1,36 @@
+:root {
+  --light-pink: #FFD6E7;
+  --dark-pink: #D1479E;
+  --light-yellow: #FFFAE6; /* Светло-желтый цвет для фона */
+  --dark-yellow: #FFD700; /* Темно-желтый цвет для акцентов */
+  --border-radius: 5px;
+  --transition-speed: 0.3s;
+}
+
 .wrapper {
+  background-color: var(--light-pink);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  width: 40vw;
-
+  width: 30vw;
   padding: 20px;
-  border: 1px solid #3f3e3e;
+  border: 2px solid #7c7c7c;
   border-radius: 10px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  font-family: 'Montserrat, sans-serif';
 }
 
 .head {
+  color: var(--dark-pink);
+  font-weight: bold;
   margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .inputs {
   width: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -25,9 +38,40 @@
 }
 
 .inputs input {
-  margin-bottom: 20px
+  margin-bottom: 20px;
+  border-radius: var(--border-radius);
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.inputs input:focus {
+  box-shadow: 0 0 0 2px var(--dark-pink); 
+}
+
+.inputs input:hover {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .btns {
   margin-top: 20px;
+}
+
+.btns button {
+  background-color: var(--dark-yellow);
+  color: var(--dark-pink);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btns button:hover {
+  background-color: #FF69B4;
+  transform: translateY(-2px);
+}
+
+.btns button:hover, .btns button:focus {
+  background-color: var(--light-yellow);
+  transform: translateY(-2px);
+  outline: none; 
 }

@@ -1,0 +1,79 @@
+:root {
+    --soft-pink: #fcd1e3;
+    --soft-yellow: #f9e5b6;
+    --cool-grey: #9b9e9c;
+    --border-radius: 10px;
+    --transition-speed: 0.3s;
+  }
+
+  .profileWrapper {
+    background-color: var(--soft-pink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    padding: 20px;
+    margin-left: 10vw; 
+    border: 2px solid var(--cool-grey);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat, sans-serif';
+  }
+  
+  .profileHead {
+    color: var(--cool-grey);
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .profileInputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  
+  .profileInputs input {
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+  }
+  
+  .profileInputs input:focus {
+    box-shadow: 0 0 0 2px var(--cool-grey); 
+  }
+  
+  .profileInputs input:hover {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .profileBtns {
+    margin-top: 20px;
+  }
+  
+  .profileBtns button {
+    background-color: var(--soft-yellow);
+    color: var(--cool-grey);
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+  }
+  
+  .profileBtns button:hover {
+    background-color: var(--cool-grey);
+    color: var(--soft-pink);
+    transform: translateY(-2px);
+  }
+  
+  .profileBtns button:hover, .profileBtns button:focus {
+    background-color: var(--cool-grey);
+    color: var(--soft-pink);
+    transform: translateY(-2px);
+    outline: none; 
+  }
