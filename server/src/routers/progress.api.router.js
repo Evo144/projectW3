@@ -1,14 +1,10 @@
 const router = require('express').Router();
-const { User, Card, Stat } = require('../../db/models');
+const { User, Card } = require('../../db/models');
 const { verifyAccessToken } = require('../middlewares/verifyToken');
 
 router.post('/:id', verifyAccessToken, async (req, res) => {
   const { id } = req.params;
   try {
-    const entryStat = await User.findOne({
-      where: { id },
-      include: { model: Stat },
-    });
     const entryCards = await User.findOne({
       where: { id },
       include: [
@@ -24,7 +20,7 @@ router.post('/:id', verifyAccessToken, async (req, res) => {
     if (res.locals.user.id === entryCards.dataValues.id) {
       const eCards = entryCards.get({ plain: true });
       const { username, Cards } = eCards;
-      const points = entryStat.Stat.points;
+      let quantityOfLearnedCards = 0;
       let quantityOfCards = 0;
       const cardsProgress = {};
       
@@ -39,14 +35,15 @@ router.post('/:id', verifyAccessToken, async (req, res) => {
         }
         if (card.isLearned) {
           cardsProgress[card.category].isLearnedTrue += 1;
+          quantityOfLearnedCards += 1;
         }
         cardsProgress[card.category].totalCards += 1;
         cardsProgress[card.category].id = card.id;
         quantityOfCards += 1;
       });
       const progress = Object.values(cardsProgress)
-      const cardsByCategory = { username, quantityOfCards, points, progress };
-      console.log(progress);
+      const cardsByCategory = { username, quantityOfCards, quantityOfLearnedCards, progress };
+      // console.log('cardsByCategory----------------++', cardsByCategory);
       res.json(cardsByCategory);
     } else {
       res.sendStatus(403);
