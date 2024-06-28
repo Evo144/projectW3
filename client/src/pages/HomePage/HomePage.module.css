@@ -1,8 +1,49 @@
-.wrapper {
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: transparent;
+  visibility: hidden;
+}
+
+.card {
+  width: 200px;
+  min-height: 100px; 
+  max-height: 500px;
+  margin: 20px;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+}
+
+.cardFront {
+  background-color: var(--chakra-colors-customColors-gold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  visibility: visible;
+}
+
+.cardBack {
+  background-color: var(--chakra-colors-customColors-darkPink);
+  color: var(--chakra-colors-customColors-lightGray);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  padding: 20px;
+  height: auto;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  visibility: visible;
 }
