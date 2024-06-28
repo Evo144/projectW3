@@ -2,7 +2,7 @@ import ProgressCard from "./ProgressCard";
 import styles from "./ProgressCard.module.css";
 import axiosInstance from "../../axiosInstance";
 import { useState, useEffect } from "react";
-import { Heading, Text  } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 
 const { VITE_API } = import.meta.env;
 

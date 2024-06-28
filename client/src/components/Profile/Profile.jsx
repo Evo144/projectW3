@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
 import ProgressList from "../ProgressBar/ProgressList"
-
-import { FormLabel, Button, Input } from "@chakra-ui/react";
+import "./direction.module.css";
+import './Profile.module.css';
+import { FormLabel, Button, Input, Stack, HStack, VStack, Box, Spacer, Container  } from "@chakra-ui/react";
 
 const { VITE_API } = import.meta.env;
 
@@ -37,8 +38,10 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
     
 
   return (
-    <>
-      <div>
+    <Stack direction={['column', 'row']} spacing='24px'>
+          <Spacer/>
+
+      <Container >
         <form onSubmit={handleSubmit}>
         <FormLabel>Category</FormLabel>
         <Input
@@ -82,9 +85,14 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
           Создать карточку
         </Button>
       </form>
-    </div>
+    </Container >
+    <Spacer/>
+    <Container> 
     <ProgressList user={user} />
-    </>
+    </Container>
+    <Spacer/>
+
+    </Stack >
   );
 };
 
