@@ -8,8 +8,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  background-color: #f0f8c4; 
-  color: #343434; 
+  background-color: #fce5ce; 
+  background-image: linear-gradient(to right, #fae3f5, #ffeecb, #f6ffe7);
+  color: #343434;
+  transition: background-color 0.3s, background-image 0.3s;
+  box-shadow: 1px 1px 7px rgba(121, 121, 121, 0.3);
+  z-index: 9999;
 }
 
 .left {
@@ -26,43 +30,43 @@
 .homeLink {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-  color: #343434; 
+  color: #4b4b4b;
   transition: all 0.2s cubic-bezier(.08,.52,.52,1);
 }
 
+.homeLink:hover {
+  transform: scale(1.05);
+}
 
 a {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-  color: #000;
+  color: #4b4b4b;
   transition: all 0.2s cubic-bezier(.08,.52,.52,1);
 }
 
-a:hover {
-  text-decoration: underline;
-  color: #D1479E;
-}
+
 
 .signinLink {
   margin-right: 10px; 
 } 
 
 .signin-signup-link {
-  background-color: #f0dba4; 
+  background-color:  #f8c8d8;
   padding: 10px 15px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; 
-  border: 1px solid #d3c1ae; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+  border: 1px solid #d3c1ae;
   color: #5a5a5a;
   text-decoration: none; 
   font-weight: bold; 
 }
 
 .signin-signup-link:hover {
-  background: linear-gradient(45deg, rgba(255, 183, 197, 1), rgba(255, 159, 243, 1));
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  transform: scale(1.05); 
+  background-color: #f8a8b8; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 
@@ -72,7 +76,31 @@ a:hover {
   background-color: #FFD6E7; 
 }
 
-.profile-logout-link:hover {
-  background-color: #F0E6EF; 
-  color: #000; 
+
+
+.signin-signup-link:hover, .profile-logout-link:hover {
+  background-color: #ffe4e1; 
+  color: #343434; 
+}
+
+.profileLink {
+  margin-right: 20px;
+}
+
+.profileLink, .logoutLink {
+  background-color: #f8c8d8;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+  border: 1px solid #d3c1ae;
+  color: #5a5a5a; 
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.profileLink:hover, .logoutLink:hover {
+  background-color: #f8a8b8; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }

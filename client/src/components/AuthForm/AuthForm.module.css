@@ -1,6 +1,6 @@
 :root {
   --soft-pink: #FDE2E4; 
-  --muted-pink: #FAD2E1; 
+  --muted-pink: #f8c8d8; 
   --soft-yellow: #FFF5BA; 
   --muted-yellow: #FFFACD; 
   --contrast-dark: #333333;
@@ -16,6 +16,7 @@
   justify-content: center;
   align-items: center;
   width: 30vw;
+  margin-top: 200px;
   padding: 20px;
   border: 2px solid #7c7c7c;
   border-radius: 10px;
