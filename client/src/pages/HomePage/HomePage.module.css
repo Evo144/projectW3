@@ -47,3 +47,42 @@
   letter-spacing: 1px;
   visibility: visible;
 }
+.greetings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background: linear-gradient(135deg, #FFF0E0 0%, #FFE4E1 100%);
+  font-family: 'Montserrat', sans-serif;
+}
+.greetings img {
+  max-width: 150px;
+  margin-bottom: 30px;
+}
+.greetings h1 {
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: #333;
+  text-shadow: 2px 2px 4px rgba(51, 51, 51, 0.2);
+}
+.greetings p {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: #666;
+}
+.greetings button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  background-color: #F8C8D8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  transition: background-color 0.3s ease;
+}
+.greetings button:hover {
+  background-color: #F8A8B8;
+}

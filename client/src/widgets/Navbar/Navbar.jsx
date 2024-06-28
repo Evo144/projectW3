@@ -15,18 +15,18 @@ export default function Navbar({ user, setUser }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.left}>
-        <Link className={styles.homeLink} to='/'>На главную</Link>
+        <Link className={styles.homeLink} to='/'>Home</Link>
       </div>
       <div className={styles.right}>
         {user?.username ? (
           <>
             <Link className={styles.profileLink}  to='/profile'>{user.username}</Link>
-            <Link className={styles.logoutLink} onClick={logoutHandler}>Выйти</Link>
+            <Link className={styles.logoutLink} onClick={logoutHandler}>Logout</Link>
           </>
         ) : (
           <>
-            <Link className={`${styles.signinLink} ${styles['signin-signup-link']}`} to='/signin'>Войти</Link>
-            <Link className={`${styles.signupLink} ${styles['signin-signup-link']}`} to='/signup'>Регистрация</Link>
+            <Link className={`${styles.signinLink} ${styles['signin-signup-link']}`} to='/signin'>Signin</Link>
+            <Link className={`${styles.signupLink} ${styles['signin-signup-link']}`} to='/signup'>Signup</Link>
           </>
         )}
       </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
 import AnimatedCard from "./AnimatedCard";
-// import styles from './HomePage.module.css';
+ import styles from './HomePage.module.css';
 import {
   Box,
   Card,
@@ -26,7 +26,6 @@ export default function HomePage({
     isLearned,
     setIsLearned,
 }) {
-    const [flippedCardIds, setFlippedCardIds] = useState(new Set());
     const [categories, setCategories] = useState([]);
     const [editMode, setEditMode] = useState(false);
     const [editedCard, setEditedCard] = useState(null);
@@ -36,16 +35,17 @@ export default function HomePage({
     const [isLearnedFilter, setIsLearnedFilter] = useState(false);
 
     useEffect(() => {
-        const fetchCards = async () => {
-            try {
-                const { data } = await axiosInstance.get(`${VITE_API}/card`);
-                setCard(data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchCards();
-    }, []);
+      const fetchCards = async () => {
+          try {
+              const { data } = await axiosInstance.get(`${VITE_API}/card`);
+              setFilteredCards(data);
+              handleSelectFilter("all"); 
+          } catch (error) {
+              console.log(error);
+          }
+      };
+      fetchCards();
+  }, []);
 
     useEffect(() => {
         const fetchCardsCategories = async () => {
@@ -61,17 +61,7 @@ export default function HomePage({
         fetchCardsCategories();
     }, []);
 
-    const handleCardClick = (id) => {
-        setFlippedCardIds((prevIds) => {
-            const newIds = new Set(prevIds);
-            if (newIds.has(id)) {
-                newIds.delete(id);
-            } else {
-                newIds.add(id);
-            }
-            return newIds;
-        });
-    };
+
 
     const deleteHandler = async (cardId) => {
         try {
@@ -79,8 +69,7 @@ export default function HomePage({
                 `${VITE_API}/card/${cardId}`
             );
             if (response.status === 200) {
-                console.log("Карточка", card);
-                console.log("Карточка ID", cardId);
+                
                 setFilteredCards((prev) =>
                     prev.filter((el) => el.id !== cardId)
                 );
@@ -135,6 +124,11 @@ export default function HomePage({
         }
     };
 
+
+     console.log('setCard', setCard)
+
+    
+
     const handleLearnedCheckboxChange = async (cardId) => {
         const updatedCard = card.find((el) => el.id === cardId);
         updatedCard.isLearned = !updatedCard.isLearned;
@@ -150,39 +144,37 @@ export default function HomePage({
     };
 
     const handleSelectFilter = (filter) => {
-        setCurrentFilter(filter);
-
-        setFilteredCards((prevCards) => {
-            let cards = [...prevCards];
-
-            if (filter === "all") {
-                cards = card.filter((el) =>
-                    selectedCategory ? el.category === selectedCategory : true
-                );
-            } else if (filter === "notLearned") {
-                cards = card.filter(
-                    (el) =>
-                        !el.isLearned &&
-                        (selectedCategory
-                            ? el.category === selectedCategory
-                            : true)
-                );
-            } else if (filter === "learned") {
-                cards = card.filter(
-                    (el) =>
-                        el.isLearned &&
-                        (selectedCategory
-                            ? el.category === selectedCategory
-                            : true)
-                );
-            }
-
-            if (isLearnedFilter) {
-                cards = cards.filter((el) => el.isLearned);
-            }
-
-            return cards;
-        });
+      setCurrentFilter(filter);
+  
+      let cards = [...card];
+  
+      if (filter === "all") {
+          cards = card.filter((el) =>
+              selectedCategory ? el.category === selectedCategory : true
+          );
+      } else if (filter === "notLearned") {
+          cards = card.filter(
+              (el) =>
+                  !el.isLearned &&
+                  (selectedCategory
+                      ? el.category === selectedCategory
+                      : true)
+          );
+      } else if (filter === "learned") {
+          cards = card.filter(
+              (el) =>
+                  el.isLearned &&
+                  (selectedCategory
+                      ? el.category === selectedCategory
+                      : true)
+          );
+      }
+  
+      if (isLearnedFilter) {
+          cards = cards.filter((el) => el.isLearned);
+      }
+  
+      setFilteredCards(cards); // Обновляем состояние filteredCards сразу после изменения фильтра
     };
 
     return (
@@ -190,7 +182,7 @@ export default function HomePage({
       {user ? (
         <div>
         <Menu>
-          <MenuButton as={Button} >Темы</MenuButton>
+          <MenuButton as={Button} >Categories</MenuButton>
           <MenuList>
             {categories.map((el) => (
               <MenuItem key={el.id} onClick={() => setSelectedCategory(el.category)}>
@@ -200,16 +192,16 @@ export default function HomePage({
           </MenuList>
         </Menu>
         <Menu>
-          <MenuButton as={Button}>Тип</MenuButton>
+          <MenuButton as={Button}>Types</MenuButton>
           <MenuList>
             <MenuItem onClick={() => handleSelectFilter("all")}>
-              Все карточки
+              All cards
             </MenuItem>
             <MenuItem onClick={() => handleSelectFilter("notLearned")}>
-              Не изученные
+            Not studied
             </MenuItem>
             <MenuItem onClick={() => handleSelectFilter("learned")}>
-              Изученные
+            Studied
             </MenuItem>
           </MenuList>
         </Menu>
@@ -274,15 +266,7 @@ export default function HomePage({
                         onChange={handleChange}
                         placeholder="difficulty"
                       />
-                      <FormLabel>Изучено</FormLabel>
-                      <Checkbox
-                        type="checkbox"
-                        id="isLearned"
-                        name="isLearned"
-                        checked={editedCard.isLearned}
-                        onChange={handleChange}
-                      />
-                      <Button onClick={saveHandler}>Сохранить</Button>
+                      <Button onClick={saveHandler}>Save</Button>
                     </Box>
                   ) : (
                     <Box
@@ -306,13 +290,13 @@ export default function HomePage({
                         isChecked={el.isLearned}
                         onChange={() => handleLearnedCheckboxChange(el.id)}
                       >
-                        Изучено
+                        Studied
                       </Checkbox>
                       <Button onClick={() => editHandler(el.id)}>
-                        Редактировать карточку
+                        Edit card
                       </Button>
                       <Button onClick={() => deleteHandler(el.id)}>
-                        Удалить карточку
+                        Delete card
                       </Button>
                     </Box>
                   )}
@@ -326,7 +310,12 @@ export default function HomePage({
       </div>
       
     ) : (
-      <div>Welcome to memorizing words, мы научим тебя английским словам</div>
+      <div className={styles.greetings}>
+        {/* <img src={Logo} alt="Logo" /> */}
+     <h1>Welcome to the "Memorize Words" app</h1>
+  <p>To get started, first register! Good luck!</p>
+  <button>Register</button>
+        </div>
     )}
     </> 
 )}

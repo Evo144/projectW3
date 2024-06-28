@@ -4,7 +4,7 @@ import styles from './SignupPage.module.css';
 export default function SignupPage({ setUser }) {
   return (
     <div className={styles.wrapper}>
-      <AuthForm title='Зарегистрироваться' type='signup' setUser={setUser} />
+      <AuthForm title='Signup' type='signup' setUser={setUser} />
     </div>
   );
 }

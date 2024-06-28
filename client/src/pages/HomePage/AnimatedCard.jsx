@@ -26,7 +26,6 @@ const AnimatedCard = ({ frontContent, backContent }) => {
         style={{
           opacity: opacity.to(o => 1 - o),
           transform,
-          position: 'absolute',
           backfaceVisibility: 'hidden',
           width: '100%',
           height: '100%',
@@ -38,7 +37,6 @@ const AnimatedCard = ({ frontContent, backContent }) => {
         style={{
           opacity,
           transform: transform.to(t => `${t} rotateY(180deg)`),
-          position: 'absolute',
           backfaceVisibility: 'hidden',
           width: '100%',
           height: '100%',

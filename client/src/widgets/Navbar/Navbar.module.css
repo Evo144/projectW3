@@ -76,3 +76,7 @@ a:hover {
   background-color: #F0E6EF; 
   color: #000; 
 }
+
+.profileLink {
+  margin-right: 20px;
+}

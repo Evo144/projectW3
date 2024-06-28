@@ -3,14 +3,15 @@ import axiosInstance from "../../axiosInstance";
 import ProgressList from "../ProgressBar/ProgressList"
 import "./direction.module.css";
 import './Profile.module.css';
-import { FormLabel, Button, Input, Stack, HStack, VStack, Box, Spacer, Container  } from "@chakra-ui/react";
+import { FormLabel, Button, Input, Stack, HStack, VStack, Box, Spacer, Container, Text  } from "@chakra-ui/react";
 
 const { VITE_API } = import.meta.env;
 
 
-const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
+const Profile = ({ user, card, setCard, isLearned, setIsLearned, actualCard, setActualCard }) => {
     
     const [inputs, setInputs] = useState({category: "", word: "", translate: "", difficulty: ""})
+    
     
   
     function inputsHandler(e) {
@@ -42,6 +43,7 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
           <Spacer/>
 
       <Container >
+        <Text m={8} fontSize='2xl' color='pink' fontWeight='bald'>Create your own card</Text>
         <form onSubmit={handleSubmit}>
         <FormLabel>Category</FormLabel>
         <Input
@@ -49,7 +51,7 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
           id="category"
           name="category"
           value={inputs.category}
-          placeholder="category"
+          placeholder="Category"
           onChange={inputsHandler}
         />
         <FormLabel>Word</FormLabel>
@@ -70,19 +72,10 @@ const Profile = ({ user, card, setCard, isLearned, setIsLearned }) => {
           onChange={inputsHandler}
           placeholder="Translate"
         />
-        <FormLabel>Difficulty</FormLabel>
-        <Input
-          type="text"
-          id="difficulty"
-          name="difficulty"
-          value={inputs.difficulty}
-          onChange={inputsHandler}
-          placeholder="Difficulty"
-        />
         <br />
         <br />
         <Button type="submit" colorScheme="teal" variant="outline">
-          Создать карточку
+          Create Card
         </Button>
       </form>
     </Container >

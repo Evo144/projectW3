@@ -31,7 +31,8 @@ function App() {
                 {
                     path: "/",
                     element: (
-                        <HomePage user={user} card={card} setCard={setCard} />
+                        <HomePage user={user} card={card} setCard={setCard} 
+                    />
                     ),
                 },
                 {
@@ -50,6 +51,7 @@ function App() {
                             user={user}
                             card={card}
                             setCard={setCard}
+                           
                         />
                     ),
                 },
