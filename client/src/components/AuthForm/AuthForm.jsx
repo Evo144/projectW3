@@ -1,25 +1,36 @@
-import { useState } from 'react';
-import styles from './AuthForm.module.css';
-import { Input, Button } from '@chakra-ui/react';
-import axiosInstance, { setAccessToken } from '../../axiosInstance';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import styles from "./AuthForm.module.css";
+import { Input, Button } from "@chakra-ui/react";
+import axiosInstance, { setAccessToken } from "../../axiosInstance";
+import { useNavigate } from "react-router-dom";
+import validPassword from "../../utils/validPassword";
+
 const { VITE_API } = import.meta.env;
 
-export default function AuthForm({ title, type = 'signin', setUser }) {
-  const [inputs, setInputs] = useState({});
-  const navigate = useNavigate();
+export default function AuthForm({ title, type = "signin", setUser }) {
+    const [inputs, setInputs] = useState({});
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-  const changeHandler = (e) => {
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+    const changeHandler = (e) => {
+        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    const res = await axiosInstance.post(`${VITE_API}/auth/${type}`, inputs);
-    setUser(res.data.user);
-    setAccessToken(res.data.accessToken);
-    navigate('/');
-  };
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        const res = await axiosInstance.post(
+            `${VITE_API}/auth/${type}`,
+            inputs
+        );
+        setUser(res.data.user);
+        setAccessToken(res.data.accessToken);
+        navigate("/");
+    };
+
+    const passwordHandler = (e) => {
+        setPassword(e.target.value);
+        setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
 
   return (
     <form onSubmit={submitHandler} className={styles.wrapper}>
@@ -29,37 +40,19 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
           <>
             <Input
               onChange={changeHandler}
+              borderColor='#3f3e3e'
               type='email'
               name='email'
               value={inputs?.email}
-              placeholder='Электронная почта'
-              sx={{
-                borderColor: 'black', 
-                _hover: {
-                  borderColor: 'pink', 
-                  backgroundColor: 'yellow.100', 
-                },
-                _placeholder: {
-                  color: 'pink.400', 
-                },
-              }}
+              placeholder='Эл.почта'
             />
             <Input
               onChange={changeHandler}
+              borderColor='#3f3e3e'
               type='password'
               name='password'
-              value={inputs?.password}
+              value={inputs?.password || ""}
               placeholder='Пароль'
-              sx={{
-                borderColor: 'black', 
-                _hover: {
-                  borderColor: 'pink', 
-                  backgroundColor: 'yellow.100', 
-                },
-                _placeholder: {
-                  color: 'pink.400', 
-                },
-              }}
             />
           </>
         )}
@@ -67,53 +60,31 @@ export default function AuthForm({ title, type = 'signin', setUser }) {
           <>
             <Input
               onChange={changeHandler}
+              borderColor='#3f3e3e'
               name='username'
               value={inputs?.name}
               placeholder='Имя пользователя'
-              sx={{
-                borderColor: 'black', 
-                _hover: {
-                  borderColor: 'pink', 
-                  backgroundColor: 'yellow.100', 
-                },
-                _placeholder: {
-                  color: 'pink.400', 
-                },
-              }}
             />
             <Input
               onChange={changeHandler}
+              borderColor='#3f3e3e'
               type='email'
               name='email'
               value={inputs?.description}
-              placeholder='Электронная почта'
-              sx={{
-                borderColor: 'black', 
-                _hover: {
-                  borderColor: 'pink', 
-                  backgroundColor: 'yellow.100', 
-                },
-                _placeholder: {
-                  color: 'pink.400', 
-                },
-              }}
+              placeholder='Эл.почта'
             />
             <Input
               onChange={changeHandler}
+              borderColor='#3f3e3e'
               type='password'
               name='password'
-              value={inputs?.password}
+              value={inputs?.password || ""}
               placeholder='Пароль'
-              sx={{
-                borderColor: 'black', 
-                _hover: {
-                  borderColor: 'pink', 
-                  backgroundColor: 'yellow.100', 
-                },
-                _placeholder: {
-                  color: 'pink.400', 
-                },
-              }}
+              style={{
+                color: validPassword(password)
+                    ? "green"
+                    : "red",
+            }}
             />
           </>
         )}

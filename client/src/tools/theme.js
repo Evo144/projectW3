@@ -38,24 +38,35 @@ const theme = extendTheme({
     Card: {
       baseStyle: {
         container: {
+          maxWidth: '320px',
+          height: 'auto',
+          width: '100%', 
           bg: 'transparent',
+          margin: '0 auto',
           color: 'customColors.darkGray',
           boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
           borderRadius: '12px',
           _hover: {
             boxShadow: '0px 6px 16px rgba(0, 0, 0, 0.2)',
           },
+          position: 'relative',
         },
         front: {
+          height: 'fit-content',
           bg: 'customColors.softYellow',
           borderRadius: '12px',
           opacity: 1,
+          minH: 'auto', 
+          p: 4,
         },
         back: {
           bg: 'customColors.lightPink',
           color: 'customColors.darkGray',
           borderRadius: '12px',
           opacity: 1,
+          minH: 'auto', 
+          p: 4,
+          height: 'fit-content',
         },
       },
     },

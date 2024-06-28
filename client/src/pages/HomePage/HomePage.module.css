@@ -4,6 +4,7 @@
   align-items: center;
   padding: 20px;
   background-color: transparent;
+  visibility: hidden;
 }
 
 .card {
@@ -30,6 +31,7 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
+  visibility: visible;
 }
 
 .cardBack {
@@ -43,4 +45,5 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
+  visibility: visible;
 }
