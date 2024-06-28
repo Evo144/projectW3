@@ -186,6 +186,8 @@ export default function HomePage({
     };
 
     return (
+      <>
+      {user ? (
         <div>
         <Menu>
           <MenuButton as={Button} >Темы</MenuButton>
@@ -323,5 +325,8 @@ export default function HomePage({
         )}
       </div>
       
-    );
-}
+    ) : (
+      <div>Welcome to memorizing words, мы научим тебя английским словам</div>
+    )}
+    </> 
+)}
