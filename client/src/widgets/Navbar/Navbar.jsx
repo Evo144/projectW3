@@ -20,8 +20,8 @@ export default function Navbar({ user, setUser }) {
       <div className={styles.right}>
         {user?.username ? (
           <>
-            <Link className={styles.profileLink}  to='/profile'>{user.username}</Link>
-            <Link className={styles.logoutLink} onClick={logoutHandler}>Выйти</Link>
+           <Link className={`${styles.profileLink} ${styles['signin-signup-link']}`} to='/profile'>{user.username}</Link>
+           <Link className={`${styles.logoutLink} ${styles['signin-signup-link']}`} onClick={logoutHandler}>Выйти</Link>
           </>
         ) : (
           <>

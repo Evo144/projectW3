@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axiosInstance from "../../axiosInstance";
 import AnimatedCard from "./AnimatedCard";
-// import styles from './HomePage.module.css';
+import styles from './HomePage.module.css';
+import Logo from '../../../img/Logo.svg';
 import {
   Box,
   Card,
@@ -34,6 +35,7 @@ export default function HomePage({
     const [filteredCards, setFilteredCards] = useState([]);
     const [currentFilter, setCurrentFilter] = useState("all");
     const [isLearnedFilter, setIsLearnedFilter] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
         const fetchCards = async () => {
@@ -187,6 +189,8 @@ export default function HomePage({
 
     return (
         <div>
+              {isAuthenticated && (
+                <>
         <Menu>
           <MenuButton as={Button} >Темы</MenuButton>
           <MenuList>
@@ -209,6 +213,7 @@ export default function HomePage({
             <MenuItem onClick={() => handleSelectFilter("learned")}>
               Изученные
             </MenuItem>
+     
           </MenuList>
         </Menu>
         {filteredCards.length ? (
@@ -321,6 +326,14 @@ export default function HomePage({
         ) : (
           <div>Карточек нет</div>
         )}
+        </>
+              )}
+     {!isAuthenticated && 
+     <div className={styles.greetings}>
+     <h1>Welcome to the "Memorize Words" app</h1>
+  <p>To get started, first register! Good luck!</p>
+  <button>Register</button>
+        </div>}
       </div>
       
     );

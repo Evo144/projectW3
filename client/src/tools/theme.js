@@ -103,7 +103,7 @@ const theme = extendTheme({
         color: 'customColors.black',
         _hover: {
           textDecoration: 'underline',
-          color: 'customColors.darkPink',
+          color: 'customColors.darkGray',
         },
       },
       h1: {
