@@ -18,8 +18,11 @@ export default function AuthForm({ title, type = "signin", setUser }) {
     };
 
     const submitHandler = async (e) => {
+        if (!validPassword(password)) {
+            //setError("Введите корректный пароль");
+            return setError("Введите корректный пароль");
+        }
         e.preventDefault();
-
         try {
             const res = await axiosInstance.post(
                 `${VITE_API}/auth/${type}`,
@@ -29,7 +32,8 @@ export default function AuthForm({ title, type = "signin", setUser }) {
             setAccessToken(res.data.accessToken);
             navigate("/");
         } catch (err) {
-            setError("Пользователь уже существует");
+            console.log(err);
+            setError(err.response.data.message);
         }
     };
 
